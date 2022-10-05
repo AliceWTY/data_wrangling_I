@@ -113,12 +113,28 @@ filter(litters_df, group %in% c("Con7", "Mod8"))
 
 
 # `mutate`
- Example
+
+Example
  - create a new variable wt_gain
  - modify the exsiting variable, change all "group" data into lower case and rewrite them under the "group" variable
 ```{r}
 mutate(litters_df, 
        wt_gain = gd18_weight - gd0_weight,
        group = str_to_lower(group))
+```
+
+
+
+# `arrange`
+
+Arrange the data by pups_born_alive.
+```{r}
+arrange(litters_df, pups_born_alive)
+```
+
+Arrange by two variables.
+Arrange the data by pups_born_alive. Then, under that arrange data by gd0_weight.
+```{r}
+arrange(litters_df, pups_born_alive, gd0_weight)
 ```
 
