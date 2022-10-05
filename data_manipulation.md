@@ -50,9 +50,9 @@ litters_df
     ## # … with 39 more rows, and abbreviated variable names ¹​gd_of_birth,
     ## #   ²​pups_born_alive, ³​pups_dead_birth, ⁴​pups_survive
 
-## `select`
+# `select`
 
-#### Keep or delete some columns.
+### Keep or delete some columns.
 
 Keep certain or range of columns.
 
@@ -122,7 +122,7 @@ select(litters_df, -litter_number)
     ## # … with 39 more rows, and abbreviated variable names ¹​pups_dead_birth,
     ## #   ²​pups_survive
 
-#### Renaming solumns
+### Renaming solumns
 
 select(dataset_name, new_variable_name = original_name, new_name =
 old_name)
@@ -168,7 +168,7 @@ rename(litters_df, GROUP = group, LITTer_NUmBer = litter_number)
     ## # … with 39 more rows, and abbreviated variable names ¹​gd_of_birth,
     ## #   ²​pups_born_alive, ³​pups_dead_birth, ⁴​pups_survive
 
-#### Select helpers
+### Select helpers
 
 Check on `?select_helpers`
 
@@ -238,7 +238,7 @@ relocate(litters_df, litter_number)
     ## # … with 39 more rows, and abbreviated variable names ¹​gd_of_birth,
     ## #   ²​pups_born_alive, ³​pups_dead_birth, ⁴​pups_survive
 
-## filter
+# `filter`
 
 We need to give conditions.
 
@@ -434,3 +434,32 @@ filter(litters_df, group %in% c("Con7", "Mod8"))
     ## 14 Mod8  #82/4                 33.4        52.7       20       8       0       6
     ## # … with abbreviated variable names ¹​gd_of_birth, ²​pups_born_alive,
     ## #   ³​pups_dead_birth, ⁴​pups_survive
+
+# `mutate`
+
+Example - create a new variable wt_gain - modify the exsiting variable,
+change all “group” data into lower case and rewrite them under the
+“group” variable
+
+``` r
+mutate(litters_df, 
+       wt_gain = gd18_weight - gd0_weight,
+       group = str_to_lower(group))
+```
+
+    ## # A tibble: 49 × 9
+    ##    group litter_number   gd0_w…¹ gd18_…² gd_of…³ pups_…⁴ pups_…⁵ pups_…⁶ wt_gain
+    ##    <chr> <chr>             <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    ##  1 con7  #85                19.7    34.7      20       3       4       3    15  
+    ##  2 con7  #1/2/95/2          27      42        19       8       0       7    15  
+    ##  3 con7  #5/5/3/83/3-3      26      41.4      19       6       0       5    15.4
+    ##  4 con7  #5/4/2/95/2        28.5    44.1      19       5       1       4    15.6
+    ##  5 con7  #4/2/95/3-3        NA      NA        20       6       0       6    NA  
+    ##  6 con7  #2/2/95/3-2        NA      NA        20       6       0       4    NA  
+    ##  7 con7  #1/5/3/83/3-3/2    NA      NA        20       9       0       9    NA  
+    ##  8 con8  #3/83/3-3          NA      NA        20       9       1       8    NA  
+    ##  9 con8  #2/95/3            NA      NA        20       8       0       8    NA  
+    ## 10 con8  #3/5/2/2/95        28.5    NA        20       8       0       8    NA  
+    ## # … with 39 more rows, and abbreviated variable names ¹​gd0_weight,
+    ## #   ²​gd18_weight, ³​gd_of_birth, ⁴​pups_born_alive, ⁵​pups_dead_birth,
+    ## #   ⁶​pups_survive

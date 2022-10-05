@@ -15,9 +15,9 @@ litters_df = janitor::clean_names(litters_df)
 litters_df
 ```
 
-## `select`
+# `select`
 
-#### Keep or delete some columns.
+### Keep or delete some columns.
 
 Keep certain or range of columns.
 
@@ -39,7 +39,7 @@ select(litters_df, -litter_number)
 ```
 
 
-#### Renaming solumns
+### Renaming solumns
 
 select(dataset_name, new_variable_name = original_name, new_name = old_name)
 ```{r}
@@ -51,7 +51,7 @@ Or, you can use "rename()"
 rename(litters_df, GROUP = group, LITTer_NUmBer = litter_number)
 ```
 
-#### Select helpers
+### Select helpers
 Check on `?select_helpers`
 
 Select every variables that start with "gd."
@@ -71,7 +71,7 @@ relocate(litters_df, litter_number)
 
 
 
-## filter
+# `filter`
 We need to give conditions.
 ```{r}
 filter(litters_df, gd0_weight < 22)
@@ -109,3 +109,16 @@ For groups that are either in Con7 or Mod8.
 ```{r}
 filter(litters_df, group %in% c("Con7", "Mod8"))
 ```
+
+
+
+# `mutate`
+ Example
+ - create a new variable wt_gain
+ - modify the exsiting variable, change all "group" data into lower case and rewrite them under the "group" variable
+```{r}
+mutate(litters_df, 
+       wt_gain = gd18_weight - gd0_weight,
+       group = str_to_lower(group))
+```
+
