@@ -71,3 +71,41 @@ relocate(litters_df, litter_number)
 
 
 
+## filter
+We need to give conditions.
+```{r}
+filter(litters_df, gd0_weight < 22)
+filter(litters_df, gd0_weight >= 22)
+```
+
+two "=" sign, "==", means testing the equality
+For gf_of_birth that are equal to 20.
+```{r}
+filter(litters_df, gd_of_birth == 20)
+```
+
+For gf_of_birth that are NOT equal to 20, we can use "!="
+```{r}
+filter(litters_df, gd_of_birth != 20)
+```
+
+Or we use a more general way to get gf_of_birth that are NOT equal to 20.
+Asking for the samples that not fill in given condition. "!()"
+```{r}
+filter(litters_df, !(gd_of_birth == 20))
+```
+
+Give two conditions. Both of them need to be filled.
+```{r}
+filter(litters_df, gd0_weight >= 22, gd_of_birth == 20)
+```
+
+Select the Con7 group.
+```{r}
+filter(litters_df, group == "Con7")
+```
+
+For groups that are either in Con7 or Mod8. 
+```{r}
+filter(litters_df, group %in% c("Con7", "Mod8"))
+```
