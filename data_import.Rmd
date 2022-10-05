@@ -36,6 +36,22 @@ tail(litter_df)
 skimr::skim(litter_df)
 ```
 
+## Options to read_csv
+
+Check out `?read_csv()` for more information.
+
+#### Example
+
+litters_df = read_csv("./data/FAS_litters.csv", skip = 10, col_names = FALSE, na = c("","NA",".",999), col_types)
+
+- Skip the first 10 rows.
+- Show column names just as variables X1, X2, X3...
+- Tell R to see "", "NA", ".", and 999 as missing values.
+
+
+
+
+
 
 
 
