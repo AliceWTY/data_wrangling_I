@@ -14,3 +14,60 @@ litters_df = read_csv("./data/FAS_litters.csv")
 litters_df = janitor::clean_names(litters_df)
 litters_df
 ```
+
+## `select`
+
+#### Keep or delete some columns.
+
+Keep certain or range of columns.
+
+select(dataset_name, varibles you want to keep seperate by comma)
+```{r}
+select(litters_df, group, litter_number)
+```
+
+select(dataset_name, a range of variables)
+```{r}
+select(litters_df, group, gd0_weight:gd_of_birth )
+```
+
+We can specify what we don't want.
+
+select(dataset_name, -varibles you don't want)
+```{r}
+select(litters_df, -litter_number)
+```
+
+
+#### Renaming solumns
+
+select(dataset_name, new_variable_name = original_name, new_name = old_name)
+```{r}
+select(litters_df, GROUP = group, LITTer_NUmBer = litter_number)
+```
+
+Or, you can use "rename()"
+```{r}
+rename(litters_df, GROUP = group, LITTer_NUmBer = litter_number)
+```
+
+#### Select helpers
+Check on `?select_helpers`
+
+Select every variables that start with "gd."
+```{r}
+select(litters_df, starts_with("gd"))
+```
+
+We want to see litter_number, but still keep everthing else. litter_number becomes the first variable in the table.
+```{r}
+select(litters_df, litter_number, everything())
+```
+
+Or you can use relocate()
+```{r}
+relocate(litters_df, litter_number)
+```
+
+
+
