@@ -79,7 +79,7 @@ analysis_result %>%
 
 
 
-## Binding Rows
+## Binding Rows using `bind_row`
 
 Using the LotR data.
 
@@ -100,7 +100,7 @@ return_king =
   mutate(movie = "return_king")
 ```
 
-Bind all the rows together. Stacking them.
+Bind all the rows together. Stacking them and cleaning the data.
 ```{r}
 lotr_tidy = 
   bind_rows(fellowship_ring, two_towers, return_king) %>% 
@@ -115,5 +115,37 @@ lotr_tidy =
 
 
 
+## Joining Datasets
 
+Import the FAS datasets.
+
+```{r}
+pups_df = 
+  read_csv("./data/FAS_pups.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(sex = recode(sex, `1` = "male", `2` = "female"))
+
+litters_df = 
+  read_csv("./data/FAS_litters.csv") %>% 
+  janitor::clean_names() %>% 
+  relocate(litter_number) %>% 
+  separate(group, into = c("dose", "day_of_tx"), sep = 3)
+```
+
+`seperate` is used to separate the "group" column into "dose" and "day_of_tx" colums. The separation took place after the 3rd character. 
+
+
+Next step, joining them. Merging the litters data into the pups data through `left_joint(into_dataset, other_dataset`.
+
+```{r}
+fas_df = 
+  left_join(pups_df, litters_df, by = "litter_number") %>% 
+  arrange(litter_number) %>% 
+  relocate(litter_number, dose, day_of_tx)
+```
+
+Data cleaning
+
+- arrange the order by litter_number
+- set litter_number, dose, day_of_tx as the first 3 variables, via `relocate()`.
 
